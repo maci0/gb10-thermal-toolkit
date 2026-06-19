@@ -28,6 +28,11 @@ What you **cannot** do on GB10:
   `acpi_fan` value is coarse/stuck).
 - No power cap (`nvidia-smi -pl` is N/A).
 
+See [`FAN_MONITORING.md`](FAN_MONITORING.md) for the full recon proving there is no
+OS-reachable fan-RPM path (ACPI, device tree, hwmon, SCMI, I2C all checked), plus the
+EC-firmware reverse-engineering route for the curious. Run [`recon-fan.sh`](recon-fan.sh)
+to verify on your own unit.
+
 What you **can** do: cap the GPU graphics clock with `nvidia-smi -lgc`. That is the
 single lever this toolkit uses.
 
