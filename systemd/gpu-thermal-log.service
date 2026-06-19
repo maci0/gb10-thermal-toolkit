@@ -1,0 +1,8 @@
+[Unit]
+Description=Log GPU thermals to the journal when the GPU is active
+After=nvidia-persistenced.service
+ConditionPathExists=/usr/bin/nvidia-smi
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/gpu-thermal-log.sh

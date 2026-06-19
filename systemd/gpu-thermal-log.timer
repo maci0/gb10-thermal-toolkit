@@ -1,0 +1,11 @@
+[Unit]
+Description=Run GPU thermal logging every minute
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1min
+AccuracySec=2s
+Unit=gpu-thermal-log.service
+
+[Install]
+WantedBy=timers.target

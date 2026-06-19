@@ -1,0 +1,18 @@
+[Unit]
+Description=NVIDIA GB10 GPU clock cap (static OCP/thermal shutdown workaround)
+After=nvidia-persistenced.service systemd-modules-load.service
+Wants=nvidia-persistenced.service
+ConditionPathExists=/usr/bin/nvidia-smi
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStartPre=/usr/bin/nvidia-smi -pm 1
+# Stock max is 3003 MHz. 2000-2300 is the reported-safe range; lower if it still trips.
+ExecStart=/usr/bin/nvidia-smi -lgc 0,2000
+ExecStop=/usr/bin/nvidia-smi -rgc
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

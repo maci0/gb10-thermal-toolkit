@@ -1,0 +1,13 @@
+[Unit]
+Description=Dynamic GPU clock governor for GB10 (temperature-driven clock cap)
+After=nvidia-persistenced.service nvidia-gb10-clock-cap.service
+ConditionPathExists=/usr/bin/nvidia-smi
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/gpu-thermal-governor.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
